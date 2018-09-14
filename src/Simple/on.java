@@ -1,6 +1,6 @@
 package Simple;
 
-
+import static Simple.ReverseInteger.reverseInteger;
 import static Simple.TwoSum.twoSum;
 
 public class on {
@@ -11,7 +11,9 @@ public class on {
         for(Integer i:result){
             System.out.print(i+" ");
         }
+int n=reverseInteger(1320);
 
+        System.out.print("\n"+n);
     }
 
 
