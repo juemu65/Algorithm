@@ -1,7 +1,16 @@
 package Simple;
 
+
+import static Simple.TwoSum.twoSum;
+
 public class on {
     public static void main(String[] args) {
-        System.out.print("11111");
+        //two sum
+        int [] sum1={2,7,8,15};
+        twoSum(sum1,9);
+
     }
+
+
 }
+
