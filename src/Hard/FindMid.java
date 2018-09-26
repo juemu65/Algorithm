@@ -1,7 +1,7 @@
 package Hard;
 
 public class FindMid {
-    
+
     public double findMedianSortedArrays(int[] A, int[] B) {
         int n = A.length + B.length;
 
