@@ -5,6 +5,8 @@ public class StrtoInt {
     public int myAtoi(String str) {
         // Start typing your Java solution below
         // DO NOT write main() function
+        //字符串转整数
+
         if(str == null) {
             return 0;
         }

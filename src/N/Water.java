@@ -1,6 +1,9 @@
 package N;
 
 public class Water {
+
+    //盛最多的水容器
+
     int computeArea(int left, int right,  int[] heights) {
         return (right-left)*Math.min(heights[left], heights[right]);
     }

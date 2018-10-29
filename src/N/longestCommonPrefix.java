@@ -1,4 +1,4 @@
-package Simple;
+package N;
 
 public class longestCommonPrefix {
     /*
