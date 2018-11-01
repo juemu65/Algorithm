@@ -2,7 +2,7 @@ package N;
 
 public class longestCommonPrefix {
     /*
-    * 无重复最长子串
+    * 3.无重复最长子串
     * 给定一个字符串，找出不含有重复字符的最长子串的长度
     *
     * */

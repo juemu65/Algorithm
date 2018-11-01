@@ -3,7 +3,7 @@ package Hard;
 
 
 public class ReverseNode {
-//翻转链表
+//  25.K个一组翻转链表
 
 //    给出一个链表，每 k 个节点一组进行翻转，并返回翻转后的链表。
 //

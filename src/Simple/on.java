@@ -1,7 +1,7 @@
 package Simple;
 
-import static Simple.Palindrome.isPalindrome;
-import static Simple.ReverseInteger.reverseInteger;
+import static N.Palindrome.isPalindrome;
+import static Hard.ReverseInteger.reverseInteger;
 import static Simple.TwoSum.twoSum;
 
 public class on {

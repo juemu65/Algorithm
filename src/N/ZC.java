@@ -2,7 +2,7 @@ package N;
 
 public class ZC {
 /*
-* Z字形变换
+* 6.Z字形变换
 * 输入字符串，转换成Z字型格式输出
 *
 * */

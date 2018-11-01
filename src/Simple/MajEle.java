@@ -4,7 +4,7 @@ package Simple;
 import java.util.*;
 
 public class MajEle {
-    //求众数
+    //169.求众数
     public int majorityNumber(List<Integer> nums) {
 
         int currentMajor = 0;

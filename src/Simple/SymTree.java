@@ -1,7 +1,7 @@
 package Simple;
 
 public class SymTree {
-    //对称二叉树
+    //101.对称二叉树
 
 
     public class TreeNode {

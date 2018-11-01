@@ -1,7 +1,7 @@
 package Simple;
 
 public class PathSum {
-    //路径总和
+    //112.路径总和
 
     public boolean hasPathSum(TreeNode root, int sum) {
         if (root == null) {

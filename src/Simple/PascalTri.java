@@ -1,7 +1,7 @@
 package Simple;
 import java.util.*;
 public class PascalTri {
-    //杨辉三角
+    //118.杨辉三角
 
     public ArrayList<ArrayList<Integer>> generate(int numRows) {
         ArrayList<ArrayList<Integer>> rst = new ArrayList<ArrayList<Integer>>();
@@ -29,7 +29,8 @@ public class PascalTri {
         return rst;
     }
 
-    //
+    // 119.杨辉三角II
+
     // 给定一个非负索引 k，其中 k ≤ 33，返回杨辉三角的第 k 行
     //
     // public ArrayList<Integer> getRow(int rowIndex) {

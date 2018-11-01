@@ -1,7 +1,7 @@
 package Simple;
 
 public class Linkcyc {
-    //检测环形链表
+    //141.检测环形链表
     class ListNode {
       int val;
       ListNode next;

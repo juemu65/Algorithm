@@ -3,7 +3,7 @@ package Simple;
 import java.util.*;
 
 public class Parentheses {
-//有效括号
+//20.有效括号
     //给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
 //
 //有效字符串需满足：

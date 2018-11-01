@@ -1,7 +1,7 @@
 package Simple;
 
 public class ClimStairs {
-    //爬楼梯
+    //70.爬楼梯
     //假设你正在爬楼梯，需要n步你才能到达顶部。
     // 但每次你只能爬一步或者两步，你能有多少种不同的方法爬到楼顶部？
     int[] result = null;
