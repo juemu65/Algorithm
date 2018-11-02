@@ -1,29 +1,23 @@
 package Simple;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class TwoSum {
     //1.两数之和
     //
     //给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。
-    
 
 
-    public static int[] twoSum(int[] numbers, int target) {
-        HashMap<Integer,Integer> map = new HashMap<>();
-        //HashMap
-        for (int i = 0; i < numbers.length; i++) {
-            if (map.get(numbers[i]) != null) {
-                int[] result = {map.get(numbers[i]), i+1};
-                return result;
+
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) {
+                return new int[] {map.get(target - nums[i]), i};
             }
-            map.put(target - numbers[i], i+1);
+            map.put(nums[i], i);
         }
-
-        int[] result = {};
-        return result;
-
-
+        return new int[0];
     }
 
 
