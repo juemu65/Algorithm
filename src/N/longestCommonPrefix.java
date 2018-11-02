@@ -2,52 +2,36 @@ package N;
 
 public class longestCommonPrefix {
     /*
-    * 3.无重复最长子串
-    * 给定一个字符串，找出不含有重复字符的最长子串的长度
+    * 14.最长公共前缀
+    * 查找字符串数组中的最长公共前缀。
     *
     * */
     public String longestCommonP(String[] strs) {
-        if (strs == null || strs.length == 0) {
+        if (strs .length==0) return "";
+        char[] chars1 = strs[0].toCharArray();
+        int last = chars1.length;
+        for (int i = 1; i < strs.length; i++) {
+            char[] chars2 = strs[i].toCharArray();
+            if (chars2.length < last) last = chars2.length;
+            int temp = 0;
+            for (int j = 0; j < last; j++) {
+                if (chars1[j] == chars2[j]) {
+                    temp += 1;
+                } else {
+                    break;
+                }
+            }
+            if (last > temp) last = temp;
+        }
+        if (last <= 0) {
             return "";
         }
-        String prefix = strs[0];
-        for (int i = 1; i < strs.length; i++) {
-            int j = 0;
-            while (j < strs[i].length() && j < prefix.length() && strs[i].charAt(j) == prefix.charAt(j)) {
-                j++;
-            }
-            if (j == 0) {
-                return "";
-            }
-            prefix = prefix.substring(0, j);
-        }
-        return prefix;
+        char[] chars = new char[last];
+        System.arraycopy(chars1, 0, chars, 0, last);
+        return String.valueOf(chars);
 
     }
 /*
-暴力法
-    int n = s.length();
-        int ans = 0;
-        for (int i = 0; i < n; i++)
-            for (int j = i + 1; j <= n; j++)
-                if (allUnique(s, i, j)) ans = Math.max(ans, j - i);
-        return ans;
-
-    public boolean allUnique(String s, int start, int end) {
-        Set<Character> set = new HashSet<>();
-        for (int i = start; i < end; i++) {
-            Character ch = s.charAt(i);
-            if (set.contains(ch)) return false;
-            set.add(ch);
-        }
-        return true;
-    }
-
-
-
-
-
-
 
     */
 }
