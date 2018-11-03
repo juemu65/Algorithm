@@ -6,22 +6,27 @@ public class Palindrome {
 * 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000
 *
 * */
-    public static void isPalindrome(int x) {
-        if (x < 0 || (x % 10 == 0 && x != 0)) {
-            System.out.print("False");
-            return;
+public String longestPalindrome(String s) {
+    if(s.length()<2) return s;
+    int n=s.length();
+    int start=0, end=0;
+    for(int i=0;i<n;i++){
+        int len1=expandAroundCenter(s,i,i);
+        int len2=expandAroundCenter(s,i,i+1);
+        int len=Math.max(len1, len2);
+        if(end-start<len) {
+            start=i-(len-1)/2;
+            end=i+len/2;
         }
+    }
 
-        int rever = 0;
-        while (x > rever) {
-            rever = rever * 10 + x % 10;
-            x /= 10;
+    return s.substring(start,end+1);
+}
+    public static int expandAroundCenter(String s,int left,int right) {
+        while(left>=0&&right<s.length()&&s.charAt(left)==s.charAt(right)) {
+            left--;right++;
         }
-        if (x == rever || x == rever / 10) {
-            System.out.print("True");
-        } else {
-            System.out.print("False");
-        }
+        return right-left-1;
     }
 
 }
