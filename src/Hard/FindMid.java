@@ -10,66 +10,86 @@ public class FindMid {
 //    你可以假设 nums1 和 nums2 不同时为空。
 
 
-    public double findMedianSortedArrays(int[] A, int[] B) {
-        int n = A.length + B.length;
-
-        if (n % 2 == 0) {
-            return (findKth(A, B, n / 2) + findKth(A, B, n / 2 + 1)) / 2.0;
-        }
-
-        return findKth(A, B, n / 2 + 1);
-    }
-
-    // k is not zero-based, it starts from 1
-    public int findKth(int[] A, int[] B, int k) {
-        if (A.length == 0) {
-            return B[k - 1];
-        }
-        if (B.length == 0) {
-            return A[k - 1];
-        }
-
-        int start = Math.min(A[0], B[0]);
-        int end = Math.max(A[A.length - 1], B[B.length - 1]);
-
-        // find first x that >= k numbers is smaller or equal to x
-        while (start + 1 < end) {
-            int mid = start + (end - start) / 2;
-            if (countSmallerOrEqual(A, mid) + countSmallerOrEqual(B, mid) < k) {
-                start = mid;
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int length1 = nums1.length;
+        int length2 = nums2.length;
+        if (length1 == 0) {
+            if (length2 % 2 == 1) {
+                double res = nums2[length2 / 2];
+                return res;
             } else {
-                end = mid;
+                double a=nums2[length2 / 2 - 1];
+                double b=nums2[length2 / 2];
+                double res = (a+b) / 2;
+                return res;
             }
         }
-
-        if (countSmallerOrEqual(A, start) + countSmallerOrEqual(B, start) >= k) {
-            return start;
-        }
-
-        return end;
-    }
-
-    private int countSmallerOrEqual(int[] arr, int number) {
-        int start = 0, end = arr.length - 1;
-
-        // find first index that arr[index] > number;
-        while (start + 1 < end) {
-            int mid = start + (end - start) / 2;
-            if (arr[mid] <= number) {
-                start = mid;
+        if (length2 == 0) {
+            if (length1 % 2 == 1) {
+                double res = nums1[length1 / 2];
+                return res;
             } else {
-                end = mid;
+                double a=nums1[length1 / 2 - 1];
+                double b=nums1[length1 / 2];
+                double res = (a+b) / 2;
+                return res;
             }
         }
-
-        if (arr[start] > number) {
-            return start;
+        int[] total = new int[length1 + length2];
+        int index = 0;
+        boolean isAdd = true;
+        int i = 0;
+        int j = 0;
+        boolean b1 = true;
+        boolean b2 = true;
+        while (b1 || b2) {
+            if (nums1[i] > nums2[j]) {
+                if (b2) {
+                    total[index] = nums2[j];
+                }
+                else {
+                    total[index] = nums1[i];
+                }
+                if (j == length2 - 1 && b2) {
+                    b2 = false;
+                    index++;
+                    continue;
+                }
+                if (b2) {
+                    j++;
+                } else {
+                    i++;
+                }
+            } else {
+                if (b1) {
+                    total[index] = nums1[i];
+                } else {
+                    total[index] = nums2[j];
+                }
+                if (i == length1 - 1 && b1) {
+                    b1 = false;
+                    index++;
+                    continue;
+                }
+                if (b1) {
+                    i++;
+                } else {
+                    j++;
+                }
+            }
+            index++;
+            if (index >= ((length1 + length2) / 2 + 1)) {
+                break;
+            }
         }
-
-        if (arr[end] > number) {
-            return end;
+        if ((length1 + length2) % 2 == 1) {
+            double res = total[(length1 + length2) / 2];
+            return res;
+        } else {
+            double a = total[(length1 + length2) / 2 - 1];
+            double b = total[(length1 + length2) / 2];
+            double res = (a + b) / 2;
+            return res;
         }
-
-        return arr.length;
     }
 }
