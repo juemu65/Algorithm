@@ -15,61 +15,25 @@ public class RegularEx {
 //    p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。
 
     public boolean isMatch(String s, String p) {
-        if (s == null || p == null) {
-            return false;
-        }
-
-        boolean[][] memo = new boolean[s.length()][p.length()];
-        boolean[][] visited = new boolean[s.length()][p.length()];
-
-        return isMatchHelper(s, 0, p, 0, memo, visited);
-    }
-
-    private boolean isMatchHelper(String s, int sIndex,
-                                  String p, int pIndex,
-                                  boolean[][] memo,
-                                  boolean[][] visited) {
-        // "" == ""
-        if (pIndex == p.length()) {
-            return sIndex == s.length();
-        }
-
-        if (sIndex == s.length()) {
-            return isEmpty(p, pIndex);
-        }
-
-        if (visited[sIndex][pIndex]) {
-            return memo[sIndex][pIndex];
-        }
-
-        char sChar = s.charAt(sIndex);
-        char pChar = p.charAt(pIndex);
-        boolean match;
-
-        // consider a* as a bundle
-        if (pIndex + 1 < p.length() && p.charAt(pIndex + 1) == '*') {
-            match = isMatchHelper(s, sIndex, p, pIndex + 2, memo, visited) ||
-                    charMatch(sChar, pChar) && isMatchHelper(s, sIndex + 1, p, pIndex, memo, visited);
-        } else {
-            match = charMatch(sChar, pChar) &&
-                    isMatchHelper(s, sIndex + 1, p, pIndex + 1, memo, visited);
-        }
-
-        visited[sIndex][pIndex] = true;
-        memo[sIndex][pIndex] = match;
-        return match;
-    }
-
-    private boolean charMatch(char sChar, char pChar) {
-        return sChar == pChar || pChar == '.';
-    }
-
-    private boolean isEmpty(String p, int pIndex) {
-        for (int i = pIndex; i < p.length(); i += 2) {
-            if (i + 1 >= p.length() || p.charAt(i + 1) != '*') {
-                return false;
+        if (p.length() == 0) return s.length() == 0;
+        int sL = s.length(), pL = p.length();
+        boolean[][] dp = new boolean[sL + 1][pL + 1];
+        char[] sc = s.toCharArray(), pc = p.toCharArray();
+        dp[0][0] = true;
+        for (int i = 2; i <= pL; ++i) {
+            if (pc[i - 1] == '*' && dp[0][i - 2]) {
+                dp[0][i] = true;
             }
         }
-        return true;
+        for (int i = 1; i <= sL; ++i) {
+            for (int j = 1; j <= pL; ++j) {
+                if (pc[j - 1] == '*') {
+                    dp[i][j] = dp[i][j - 2] || (pc[j - 2] == sc[i - 1] || pc[j - 2] == '.') && dp[i - 1][j];
+                } else {
+                    dp[i][j] = dp[i - 1][j - 1] && (pc[j - 1] == '.' || pc[j - 1] == sc[i - 1]);
+                }
+            }
+        }
+        return dp[sL][pL];
     }
 }
