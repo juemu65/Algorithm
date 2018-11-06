@@ -3,24 +3,27 @@ package N;
 public class Water {
 
     //11.盛最多的水容器
-
-    int computeArea(int left, int right,  int[] heights) {
-        return (right-left)*Math.min(heights[left], heights[right]);
-    }
-
-    public int maxArea(int[] heights) {
-        // write your code here
-        int left = 0, ans=  0 ;
-        int right = heights.length - 1;
-        while(left <= right) {
-            ans = Math.max(ans,computeArea(left, right, heights));
-            if(heights[left]<=heights[right])
-                left++;
-            else
-                right--;
+    public int maxArea(int[] height) {
+        int max = 0;
+        int head = 0;
+        int tail = height.length - 1;
+        for (int i = 0; i <= height.length - 2; i ++){
+            int all = 0;
+            if (height[head] < height[tail]){
+                if ((tail - head) * height[head] > max){
+                    max = (tail - head) * height[head];
+                }
+                head ++;
+            }else{
+                if ((tail - head) * height[tail] > max){
+                    max = (tail - head) * height[tail];
+                }
+                tail --;
+            }
         }
-        return ans;
+        return max;
     }
+
 }
 
 
