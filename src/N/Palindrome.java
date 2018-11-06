@@ -29,4 +29,15 @@ public String longestPalindrome(String s) {
         return right-left-1;
     }
 
+
+
+    /*
+    9. 回文数
+    //整数转为字符串
+        String s = String.valueOf(x);
+        return s.equals(new StringBuilder(s).reverse().toString());
+
+//
+
+     */
 }
