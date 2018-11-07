@@ -6,25 +6,25 @@ public class RemoveList {
 
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        if (n <= 0) {
+        if(head == null){
             return null;
         }
-
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-
-        ListNode preDelete = dummy;
-        for (int i = 0; i < n; i++) {
-            if (head == null) {
-                return null;
-            }
-            head = head.next;
+        ListNode slow = head;
+        ListNode fast = head;
+        for(int i =1 ;i<n ;i++){
+            fast = fast.next;
         }
-        while (head != null) {
-            head = head.next;
-            preDelete = preDelete.next;
+        ListNode temp = head;
+        while(fast.next != null){
+            temp = slow;
+            fast = fast.next;
+            slow = slow.next;
         }
-        preDelete.next = preDelete.next.next;
-        return dummy.next;
+        if(temp == slow){
+            return slow.next;
+        }else{
+            temp.next=temp.next.next;
+        }
+        return head;
     }
 }
