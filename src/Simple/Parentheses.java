@@ -14,28 +14,27 @@ public class Parentheses {
 
 
     public boolean isValidParentheses(String s) {
-        // Write your code here
-        Stack<Character> stack = new Stack<>();
-        for (char c : s.toCharArray()) {
-            if (c == '(' || c == '[' || c == '{') {
-                stack.push(c);
-            }
-            if (c == ')') {
-                if (stack.isEmpty() || stack.pop() != '(') {
-                    return false;
-                }
-            }
-            if (c == ']') {
-                if (stack.isEmpty() || stack.pop() != '[') {
-                    return false;
-                }
-            }
-            if (c == '}') {
-                if (stack.isEmpty() || stack.pop() != '{') {
-                    return false;
-                }
+
+        char[] chs=s.toCharArray();
+        int cur=0;
+        for(int i=0;i<s.length();i++){
+            char c=s.charAt(i);
+            switch (c){
+                case '(':
+                case '[':
+                case '{':chs[cur++]=c; break;
+
+                case ')':if(cur==0) return false;
+                    char c1=chs[--cur];if(c1!='(') return false;break;
+                case ']':if(cur==0) return false;
+                    char c2=chs[--cur];if(c2!='[') return false;break;
+                case '}':if(cur==0) return false;
+                    char c3=chs[--cur];if(c3!='{') return false;break;
             }
         }
-        return stack.isEmpty();
+        if(cur!=0){
+            return false;
+        }
+        return true;
     }
 }
