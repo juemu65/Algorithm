@@ -16,74 +16,44 @@ public class TreeSum {
 //  [-1, -1, 2]
 //]
 
-    List<List<Integer>> results = new ArrayList<>();
+public List<List<Integer>> threeSum(int[] nums) {
+    List<List<Integer>> result = new ArrayList<>();
+    Arrays.sort(nums);
+    if(nums.length < 3 || nums[0] > 0 || nums[nums.length-1] < 0)
+        return result;
 
-    // This is soring results using 1st number as 1st key, 2nd number as 2nd key...
-    class ListComparator<T extends Comparable<T>> implements Comparator<List<Integer>> {
-        @Override
-        public int compare(List<Integer> a, List<Integer> b) {
-            for (int i = 0; i < Math.min(a.size(), b.size()); i++) {
-                int c = a.get(i).compareTo(b.get(i));
-                if (c != 0) {
-                    return c;
-                }
+    for(int i = 0;i < nums.length-2;i++){
+        if(nums[i] > 0)
+            break;
+        if(i>0 && nums[i] == nums[i-1])
+            continue;
+        int target = 0 - nums[i];
+        int left = i+1;
+        int right = nums.length-1;
+
+        while (right>left){
+            if(nums[right] + nums[left] == target){
+                ArrayList temp = new ArrayList();
+                temp.add(0-target);
+                temp.add(nums[left]);
+                temp.add(nums[right]);
+                result.add(temp);
+                while (right > left && nums[right] == nums[right-1])
+                    right--;
+                while (right > left && nums[left] == nums[left+1])
+                    left++;
+                left++;
             }
-            return Integer.compare(a.size(), b.size());
+            else if(nums[right] + nums[left] > target)
+                right--;
+            else
+                left++;
         }
     }
+    return result;
+}
 
-    public List<List<Integer>> threeSum(int[] A) {
-        if (A == null || A.length < 3) {
-            return results;
-        }
 
-        Arrays.sort(A);
-        // enumerate c, the maximum element
-        int i;
-        int n = A.length;
-        for (i = 2; i < n; ++i) {
-            // c is always the last in a bunch of duplicates
-            if (i + 1 < n && A[i + 1] == A[i]) {
-                continue;
-            }
-
-            // want to find all pairs of A[j]+A[k]=-A[i], such that
-            // j < k < i
-            twoSum(A, i - 1, -A[i]);
-        }
-
-        Collections.sort(results, new ListComparator<>());
-
-        return results;
-    }
-
-    // find all unique pairs such that A[i]+A[j]=S, and i < j <= right
-    private void twoSum(int[] A, int right, int S) {
-        int i, j;
-        j = right;
-        for (i = 0; i <= right; ++i) {
-            // A[i] must be the first in its duplicates
-            if (i > 0 && A[i] == A[i - 1]) {
-                continue;
-            }
-
-            while (j > i && A[j] > S - A[i]) {
-                --j;
-            }
-
-            if (i >= j) {
-                break;
-            }
-
-            if (A[i] + A[j] == S) {
-                List<Integer> t = new ArrayList<>();
-                t.add(A[i]);
-                t.add(A[j]);
-                t.add(-S); // t.add(A[right+1])
-                results.add(t);
-            }
-        }
-    }
 }
 
 
@@ -96,28 +66,29 @@ public class TreeSum {
 //
 //与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).
 
-public int threeSumClosest(int[] numbers, int target) {
-        if (numbers == null || numbers.length < 3) {
-            return -1;
-        }
+public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+		int res = 0;
+		int differ = Integer.MAX_VALUE;
+		for (int k = 0; k < nums.length; k++) {
+			int i = k + 1, j = nums.length - 1;
+			while (i < j) {
+				int sum = nums[k] + nums[i] + nums[j];
+				int diff = Math.abs(sum - target);
+				if (diff < differ) {
+					differ = diff;
+					res = sum;
+				}
+				if (sum < target) {
+					i++;
+				} else if (sum == target) {
+					return sum;
+				} else {
+					j--;
+				}
 
-        Arrays.sort(numbers);
-        int bestSum = numbers[0] + numbers[1] + numbers[2];
-        for (int i = 0; i < numbers.length; i++) {
-            int start = i + 1, end = numbers.length - 1;
-            while (start < end) {
-                int sum = numbers[i] + numbers[start] + numbers[end];
-                if (Math.abs(target - sum) < Math.abs(target - bestSum)) {
-                    bestSum = sum;
-                }
-                if (sum < target) {
-                    start++;
-                } else {
-                    end--;
-                }
-            }
-        }
-
-        return bestSum;
+			}
+		}
+		return res;
     }
  */
