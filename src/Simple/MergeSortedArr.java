@@ -8,20 +8,45 @@ public class MergeSortedArr {
     //
     //初始化 nums1 和 nums2 的元素数量分别为 m 和 n。
     //你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。
-    public void mergeSortedArray(int[] A, int m, int[] B, int n) {
-        int i = m-1, j = n-1, index = m + n - 1;
-        while (i >= 0 && j >= 0) {
-            if (A[i] > B[j]) {
-                A[index--] = A[i--];
-            } else {
-                A[index--] = B[j--];
+
+    public class ListNode {
+      int val;
+      ListNode next;
+      ListNode(int x) { val = x; }
+  }
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == null){
+            return l2;
+        }else if(l2 == null){
+            return l1;
+        }
+        ListNode temp1=l1;
+        ListNode temp2=l2;
+        ListNode head=null;
+        ListNode temp=null;
+        if(l1.val <= l2.val){
+            head = temp1;
+            temp1 = temp1.next;
+        } else {
+            head = temp2;
+            temp2 = temp2.next;
+        }
+        temp=head;
+        while(temp1!=null&&temp2!=null){
+            if(temp1.val<=temp2.val){
+                temp.next=temp1;
+                temp1=temp1.next;
+                //temp=temp.next;
+
+            }else{
+                temp.next=temp2;
+                temp2=temp2.next;
+                //temp=temp.next;
             }
+            temp=temp.next;
         }
-        while (i >= 0) {
-            A[index--] = A[i--];
-        }
-        while (j >= 0) {
-            A[index--] = B[j--];
-        }
+        if(temp1!=null) temp.next=temp1;
+        if(temp2!=null) temp.next=temp2;
+        return head;
     }
 }
