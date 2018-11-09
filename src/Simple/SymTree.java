@@ -5,16 +5,13 @@ public class SymTree {
 
 
     public class TreeNode {
-      public int val;
-      public TreeNode left, right;
-      public TreeNode(int val) {
-          this.val = val;
-          this.left = this.right = null;
-     }
-  }
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode(int x) { val = x; }
+ }
 
     public boolean isSymmetric(TreeNode root) {
-        // Write your code here
         if(root == null){
             return true;
         }
@@ -35,5 +32,4 @@ public class SymTree {
 
 
     }
-
 }
