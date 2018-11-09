@@ -11,15 +11,15 @@ public class MaxSubarr {
     //解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
 
 
-    public int maxSubArray(int[] A) {
+    public int maxSubArray(int[] nums) {
         //贪心
-        if (A == null || A.length == 0){
+        if (nums == null || nums.length == 0){
             return 0;
         }
 
         int max = Integer.MIN_VALUE, sum = 0;
-        for (int i = 0; i < A.length; i++) {
-            sum += A[i];
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
             max = Math.max(max, sum);
             sum = Math.max(sum, 0);
         }
