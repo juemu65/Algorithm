@@ -2,7 +2,12 @@ package Simple;
 
 public class ArrToTree {
     //108.将有序数组转为二叉搜索树
-
+    public class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode(int x) { val = x; }
+  }
 
     private TreeNode buildTree(int[] num, int start, int end) {
         if (start > end) {

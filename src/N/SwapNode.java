@@ -8,6 +8,15 @@ public class SwapNode {
     //示例:
     //
     //给定 1->2->3->4, 你应该返回 2->1->4->3.
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        public ListNode(int x){
+            val=x;
+        }
+
+    }
 
     public ListNode swapPairs(ListNode head) {
         if(head == null || head.next == null) {

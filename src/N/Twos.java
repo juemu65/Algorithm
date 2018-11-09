@@ -1,7 +1,18 @@
 package N;
 
 
+
 public class Twos {
+
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        public ListNode(int x){
+            val=x;
+        }
+
+    }
 /*
 *2.两数相加
 *

@@ -1,7 +1,7 @@
 package N;
 
 public class LongestSubstring {
-    //最长无重复字符的子串
+    //3.最长无重复字符的子串
     //给定一个字符串，请找出其中无重复字符的最长子字符串。
 
     public int lengthOfLongestSubstring(String s) {
