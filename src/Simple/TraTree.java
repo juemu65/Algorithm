@@ -5,6 +5,14 @@ import java.util.*;
 public class TraTree {
     //102.二叉树层次遍历
     //自顶向下的层次遍历
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x){
+            val=x;
+        }
+    }
 
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
