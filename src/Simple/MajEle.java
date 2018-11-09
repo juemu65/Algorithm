@@ -5,23 +5,21 @@ import java.util.*;
 
 public class MajEle {
     //169.求众数
-    public int majorityNumber(List<Integer> nums) {
+    public int majorityNumber(int []nums) {
 
-        int currentMajor = 0;
         int count = 0;
-
-        for(Integer num : nums) {
-            if(count == 0) {
-                currentMajor = num;
-            }
-
-            if(num == currentMajor) {
+        int res = nums[0];
+        for (int i = 0; i < nums.length; i++) {
+            if(res==nums[i]) {
                 count++;
-            } else {
+            }else {
                 count--;
+                if(count==0) {
+                    res=nums[i];
+                    count++;
+                }
             }
         }
-
-        return currentMajor;
+        return res;
     }
 }
