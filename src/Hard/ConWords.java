@@ -1,7 +1,6 @@
 package Hard;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public class ConWords {
 
@@ -10,37 +9,37 @@ public class ConWords {
 //
 //    注意子串要与 words 中的单词完全匹配，中间不能有其他字符，但不需要考虑 words 中单词串联的顺序。
 
-    public ArrayList<Integer> findSubstring(String S, String[] L) {
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        HashMap<String, Integer> toFind = new HashMap<String, Integer>();
-        HashMap<String, Integer> found = new HashMap<String, Integer>();
-        int m = L.length, n = L[0].length();
-        for (int i = 0; i < m; i ++){
-            if (!toFind.containsKey(L[i])){
-                toFind.put(L[i], 1);
+
+
+    public static List<Integer> findSubstring(String s, String[] words) {
+        List<Integer> indexes=new ArrayList<>();
+        if(words.length==0)
+            return indexes;
+        Map<String,Integer> counts=new HashMap<>();  //记录数组中每个单元所出现的个数
+        for(String word:words) {
+            counts.put(word, counts.getOrDefault(word, 0)+1);          //因为计数时map会自动负载掉已存在的相同key，所以调用getOrDefault（方法）
+        }
+        int n=s.length(),num=words.length,len=words[0].length();
+        for(int i=0;i<n-num*len+1;i++) {                 //i是迭代字符串的起始位置，当i>=n-num*len+1的时候  所剩字符已小于要求的字符串 长度，结束
+            Map<String,Integer> seen=new HashMap<>();
+            int j=0;
+            while(j<num) {                                //该循环迭代寻找字符串，i为起始索引
+                String word=s.substring(i+j*len, i+(j+1)*len);      //每次找的是从i开始，长度为len的一个字符串
+                if(counts.containsKey(word)) {
+                    seen.put(word, seen.getOrDefault(word, 0)+1);    //将迭代到的字符串及个数放入Map中，与要求的Map进行对比
+                    if(seen.get(word)>counts.get(word))
+                        break;
+                }else {
+                    break;
+                }
+                j++;
             }
-            else{
-                toFind.put(L[i], toFind.get(L[i]) + 1);
+            if(j==num) {
+                indexes.add(i);
             }
         }
-        for (int i = 0; i <= S.length() - n * m; i ++){
-            found.clear();
-            int j;
-            for (j = 0; j < m; j ++){
-                int k = i + j * n;
-                String stub = S.substring(k, k + n);
-                if (!toFind.containsKey(stub)) break;
-                if(!found.containsKey(stub)){
-                    found.put(stub, 1);
-                }
-                else{
-                    found.put(stub, found.get(stub) + 1);
-                }
-                if (found.get(stub) > toFind.get(stub)) break;
-            }
-            if (j == m) result.add(i);
-        }
-        return result;
+        return indexes;
     }
+
 
 }
