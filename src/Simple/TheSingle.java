@@ -35,30 +35,24 @@ public class TheSingle {
     }
 
 
-    260.只出现一次的数字II
+    260.只出现一次的数字III
     给定一个整数数组 nums，其中恰好有两个元素只出现一次，
     其余所有元素均出现两次。 找出只出现一次的那两个元素
 
     public List<Integer> singleNumberIII(int[]  nums) {
-        int xor = 0;
-        for (int i = 0; i <  nums.length; i++) {
-            xor ^=  nums[i];
-        }
+        int[] re = new int[2];
+        int sum = nums[0];
 
-        int l numsstBit = xor - (xor & (xor - 1));
-        int group0 = 0, group1 = 0;
-        for (int i = 0; i <  nums.length; i++) {
-            if ((l numsstBit &  nums[i]) == 0) {
-                group0 ^=  nums[i];
-            } else {
-                group1 ^=  nums[i];
-            }
-        }
+        for (int i = 1; i < nums.length; i++)
+            sum ^= nums[i];
 
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        result.add(group0);
-        result.add(group1);
-        return result;
+        int flag = sum & (~(sum - 1));
+
+        for (int i = 0; i < nums.length; i++)
+            if ((nums[i] & flag) == 0) re[0] ^= nums[i];
+            else re[1] ^= nums[i];
+
+        return re;
     }
 
 
