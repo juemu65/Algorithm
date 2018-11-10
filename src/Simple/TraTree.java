@@ -15,63 +15,61 @@ public class TraTree {
     }
 
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
         if (root == null) {
-            return result;
-        }
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
-        queue.offer(root);
-
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            List<Integer> level = new ArrayList<>();
-            for (int i = 0; i < size; i++) {
-                TreeNode head = queue.poll();
-                level.add(head.val);
-                if (head.left != null) {
-                    queue.offer(head.left);
-                }
-                if (head.right != null) {
-                    queue.offer(head.right);
-                }
-            }
-            result.add(level);
+            return res;
         }
 
-        Collections.reverse(result);
-        return result;
+        dfs(root, res, 0);
+
+        return res;
+    }
+
+    private void dfs(TreeNode root, List<List<Integer>> res, int level) {
+        if (root == null) {
+            return;
+        }
+        if (level == res.size()) {
+            res.add(new ArrayList<>());
+        }
+        res.get(level).add(root.val);
+
+        dfs(root.left, res, level + 1);
+        dfs(root.right, res, level + 1);
     }
 
     /*
     107.二叉树层次遍历
     自底向上的层次遍历
 
-    public List<List<Integer>> levelOrderBottom(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<>();
-        if (root == null) {
-            return result;
-        }
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
-        queue.offer(root);
-
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            List<Integer> level = new ArrayList<>();
-            for (int i = 0; i < size; i++) {
-                TreeNode head = queue.poll();
-                level.add(head.val);
-                if (head.left != null) {
-                    queue.offer(head.left);
+   public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> res=new ArrayList<List<Integer>>();
+        if(root==null) return res;
+        List<TreeNode> s1=new ArrayList<TreeNode>();
+        List<TreeNode> s2=new ArrayList<TreeNode>();
+        s1.add(root);
+        while(s1.size()!=0||s2.size()!=0){
+            List<Integer> t=new ArrayList<Integer>();
+            if(s1.size()!=0){
+                while(s1.size()!=0){
+                    TreeNode p=s1.get(0);
+                    s1.remove(0);
+                    t.add(p.val);
+                    if(p.left!=null) s2.add(p.left);
+                    if(p.right!=null) s2.add(p.right);
                 }
-                if (head.right != null) {
-                    queue.offer(head.right);
+            }else{
+                while(s2.size()!=0){
+                    TreeNode p=s2.get(0);
+                    s2.remove(0);
+                    t.add(p.val);
+                    if(p.left!=null) s1.add(p.left);
+                    if(p.right!=null) s1.add(p.right);
                 }
             }
-            result.add(level);
+            res.add(0,t);
         }
-
-        Collections.reverse(result);
-        return result;
+        return res;
     }
 
     */
