@@ -27,26 +27,30 @@ public class TwoSum {
 // 167.两个有序数组的求和
 //双指针
 
-//public int[] twoSum(int[] nums, int target) {
-//        if (nums == null || nums.length == 0) {
-//            return new int[0];
-//        }
-//
-//        int left = 0;
-//        int right = nums.length - 1;
-//        int[] res = new int[2];
-//
-//        while (left < right) {
-//            int sum = nums[left] + nums[right];
-//            if (sum > target) {
-//                right--;
-//            } else if (sum < target) {
-//                left++;
-//            } else { // sum == target
-//                res[0] = left + 1;
-//                res[1] = right + 1;
-//                return res;
-//            }
-//        }
-//        return new int[0];
-//    }
+/*
+
+        public int[] twoSum(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+           return new int[0];
+         }
+
+         int left = 0;
+         int right = nums.length - 1;
+         int[] res = new int[2];
+
+         while (left < right) {
+             int sum = nums[left] + nums[right];
+             if (sum > target) {
+                 right--;
+             } else if (sum < target) {
+                 left++;
+             } else {   sum = target;
+                 res[0] = left + 1;
+                 res[1] = right + 1;
+                 return res;
+           }
+        }
+        return new int[0];
+    }
+
+    */
