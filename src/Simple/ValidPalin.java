@@ -7,38 +7,26 @@ public class ValidPalin {
     //说明：本题中，我们将空字符串定义为有效的回文串。
 
     public boolean isPalindrome(String s) {
-        if (s == null || s.length() == 0) {
+        if(s == "")
             return true;
+        char[] c = s.toCharArray();
+        int low = 0;
+        int high = c.length - 1;
+        while(low < high){
+            if(!((c[low] <= 57 && c[low] >= 48) || (c[low] <= 90 && c[low] >= 65) || (c[low] <= 122 && c[low] >= 97))){
+                low++;
+                continue;
+            }
+            if(!((c[high] <= 57 && c[high] >= 48) || (c[high] <= 90 && c[high] >= 65) || (c[high] <= 122 && c[high] >= 97)))             {
+                high--;
+                continue;
+            }
+            if(!(c[low] == c[high] || (c[low] <= 90 && c[low] >= 65 && c[low] + 32 == c[high]) || (c[high] <= 90 && c[high] >= 65 && c[high] + 32 == c[low])))
+                return false;
+            low++;
+            high--;
         }
-
-        int front = 0;
-        int end = s.length() - 1;
-        while (front < end) {
-            while (front < s.length() && !isvalid(s.charAt(front))){ // nead to check range of a/b
-                front++;
-            }
-
-            if (front == s.length()) { // for empty string “.,,,”
-                return true;
-            }
-
-            while (end >= 0 && ! isvalid(s.charAt(end))) { // same here, need to check border of a,b
-                end--;
-            }
-
-            if (Character.toLowerCase(s.charAt(front)) != Character.toLowerCase(s.charAt(end))) {
-                break;
-            } else {
-                front++;
-                end--;
-            }
-        }
-
-        return end <= front;
-    }
-
-    private boolean isvalid (char c) {
-        return Character.isLetter(c) || Character.isDigit(c);
+        return true;
     }
 
 
