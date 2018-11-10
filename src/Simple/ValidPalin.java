@@ -34,33 +34,21 @@ public class ValidPalin {
     680. 验证回文字符串 Ⅱ
     给定一个非空字符串 s，最多删除一个字符。判断是否能成为回文字符串
 
-    public boolean validPalindrome(String s) {
-        int left = 0, right = s.length() - 1;
-
-        while (left < right) {
-            if (s.charAt(left) != s.charAt(right)) {
-                break;
-            }
-            left++;
-            right--;
-        }
-
-        if (left >= right) {
-            return true;
-        }
-
-        return isSubPalindrome(s, left + 1, right) || isSubPalindrome(s, left, right - 1);
+     public boolean validPalindrome(String s) {
+        return validate(s, 0, s.length() - 1, 0, 1);
     }
 
-    private boolean isSubPalindrome(String s, int left, int right) {
-        while (left < right) {
-            if (s.charAt(left) != s.charAt(right)) {
-                return false;
+    public boolean validate(String s, int i, int j, int delCount, int N) {
+        if (delCount > N) return false; // N - times of deletion allowed.
+        while (i < j) {
+            if (s.charAt(i) == s.charAt(j)) {
+                i++;
+                j--;
+            } else {
+                delCount++;
+                return validate(s, i, j - 1, delCount, N) || validate(s, i + 1, j, delCount, N);
             }
-            left++;
-            right--;
         }
-
         return true;
     }
 
