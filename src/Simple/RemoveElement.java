@@ -24,12 +24,12 @@ public class RemoveElement {
     //注意这五个元素可为任意顺序。
     //
     //你不需要考虑数组中超出新长度后面的元素。
-    public int removeElement(int[] A, int elem) {
+    public int removeElement(int[] nums, int val) {
         int i = 0;
-        int pointer = A.length - 1;
+        int pointer = nums.length - 1;
         while(i <= pointer){
-            if(A[i] == elem){
-                A[i] = A[pointer];
+            if(nums[i] == val){
+                nums[i] = nums[pointer];
                 pointer--;
             } else {
                 i++;
