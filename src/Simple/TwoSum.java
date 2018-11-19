@@ -13,6 +13,9 @@ public class TwoSum {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             if (map.containsKey(target - nums[i])) {
+                //containsKey方法是先计算hash然后使用hash和table.length取摸得到index值，
+                // 遍历table[index]元素查找是否包含key相同的值
+
                 return new int[] {map.get(target - nums[i]), i};
             }
             map.put(nums[i], i);
