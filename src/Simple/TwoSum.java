@@ -15,6 +15,10 @@ public class TwoSum {
             if (map.containsKey(target - nums[i])) {
                 //containsKey方法是先计算hash然后使用hash和table.length取摸得到index值，
                 // 遍历table[index]元素查找是否包含key相同的值
+                // 通过使用 Map 的containsKey() 方法来检测数据（value）是否存在,
+                // 如果key存在, 则表明已经获取过一次数据, 那么直接返回该 key 在 Map 中的值.
+                // 不管是否为 null 都直接返回; 如果 key 不存在, 则去生成或者获取数据, 并放入到 Map 中, 并返回该数据
+
 
                 return new int[] {map.get(target - nums[i]), i};
             }
